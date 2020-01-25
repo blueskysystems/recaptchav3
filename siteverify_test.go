@@ -99,20 +99,14 @@ func TestSiteVerify_NilContext(t *testing.T) {
 	challengeTS := time.Now().UTC()
 
 	var (
-		ctx          context.Context = nil
-		secretKey                    = "abc"
-		captchaToken                 = "def"
-		remoteIP                     = "127.0.0.1"
+		ctx          context.Context
+		secretKey    = "abc"
+		captchaToken = "def"
+		remoteIP     = "127.0.0.1"
 	)
 
 	expected := Response{
-		Success:     false,
-		Score:       0,
-		Action:      "",
-		ChallengeTS: time.Time{},
-		Hostname:    "",
-		ErrorCodes:  nil,
-		err:         errors.New("recaptchav3: net/http: nil Context"),
+		err: errors.New("recaptchav3: net/http: nil Context"),
 	}
 
 	ts := newTestServer(challengeTS, nil)
